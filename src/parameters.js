@@ -1,10 +1,12 @@
 import { rescale } from "math";
+import { palettes } from "mandelbrot";
 
 const parameters = () => ({
   wind0w: { x0: -2.5, y0: 1.5, x1: 1, y1: -1.5 },
   iterations: 250,
   workers: 5,
   stack: [],
+  palette: 0,
 
   zoomInto: function(width, height, wx0, hy0, wx1, hy1) {
     this.stack.push(this.wind0w);
@@ -75,6 +77,16 @@ const parameters = () => ({
   changeWorkers: function(i) {
     if (this.workers + i > 0) {
       this.workers += i;
+    }
+  },
+
+  recolor: function(i) {
+    this.palette += i;
+
+    if (this.palette < 0) {
+      this.palette = palettes.length - 1;
+    } else if (this.palette >= palettes.length) {
+      this.palette = 0;
     }
   },
 });

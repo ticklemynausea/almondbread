@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     setupCanvas();
 
-    parametersRef.current = parameters(mandelbrotRef.current);
+    parametersRef.current = parameters();
 
     renderCanvas();
 
@@ -104,6 +104,15 @@ function App() {
         parameters.zoom(0, 1);
         break;
 
+      case "KeyT":
+        parameters.recolor(-1);
+        break;
+
+      case "KeyY":
+        parameters.recolor(1);
+        break;
+
+
       case "KeyH":
         toggleHelp();
         return;
@@ -117,16 +126,18 @@ function App() {
 
   const handleMouseDown = (e) => {
     dragZoom = {
-      dragging: true,
+      dragging: false,
+      down: true,
       x0: e.pageX,
       y0: e.pageY,
     };
   }
 
   const handleMouseMove = (e) => {
-    if (!dragZoom.dragging) {
+    if (!dragZoom.down) {
       return;
     }
+
     const ctx = interactionRef.current.getContext("2d")
     ctx.clearRect(
       0,
@@ -137,6 +148,7 @@ function App() {
 
      dragZoom = {
       ...dragZoom,
+       dragging: true,
       x1: e.pageX,
       y1: e.pageY,
     };
@@ -148,12 +160,14 @@ function App() {
       dragZoom.x1 - dragZoom.x0,
       dragZoom.y1 - dragZoom.y0,
     );
-
-
   }
 
   const handleMouseUp = (e) => {
     if (!dragZoom.dragging) {
+      dragZoom = {
+        dragging: false,
+        down: false,
+      }
       return;
     }
 
@@ -175,6 +189,7 @@ function App() {
 
     dragZoom = {
       dragging: false,
+      down: false,
     };
 
     const ctx = interactionRef.current.getContext("2d");

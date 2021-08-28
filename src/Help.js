@@ -43,6 +43,9 @@ const Help = () => (
 
         <dt>C / V</dt>
         <dd>Vertical scale increase/decrease</dd>
+
+        <dt>T / Y</dt>
+        <dd>Palette selection</dd>
       </dl>
 
       <footer>
