@@ -4,6 +4,7 @@ import { debounce } from "lodash";
 import Help from "Help";
 import { parameters } from "parameters";
 import { render } from "mandelbrot";
+import { query } from "query";
 import 'reset-css';
 import './App.css';
 
@@ -29,7 +30,7 @@ function App() {
   useEffect(() => {
     setupCanvas();
 
-    parametersRef.current = parameters();
+    parametersRef.current = parameters(query());
 
     renderCanvas();
 

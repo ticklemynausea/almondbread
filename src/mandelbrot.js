@@ -45,7 +45,6 @@ const palettes = [
     ["E03615", "E24C16", "E46217", "E67818", "E88D18", "ECB81A", "EECE1B", "EFD91B", "F0DE1B", "F0E31B"],
 ].map(hex2rgb);
 
-console.log(palettes.length);
 const colorMap = (iterations, palette) => Array.from({ length: iterations + 1 }, (_, iteration) => {
   if (iteration === iterations) {
     return [0, 0, 0];
@@ -111,7 +110,6 @@ bottom right ${wind0w.x1}+${wind0w.y1}i
 with ${workers} workers up to ${iterations} iterations`;
 
   const parts = await timingAsync(tag, () => parallelize(width, height, wind0w, workers, iterations));
-  console.log(palette);
   const colors = colorMap(iterations, palettes[palette]);
   const data = timing(`assembling ${parts.length} parts`, () => assemble(parts, colors));
   const imageData = new ImageData(data, width, height);
