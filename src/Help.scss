@@ -1,42 +1,73 @@
-div#help {
-  position: absolute;
+.help-overlay {
   z-index: 2;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-}
 
-div#help-panel {
-  position: absolute;
-  left: calc(50% - 400px);
-  top: calc(50% - 230px);
-  width: 800px;
-  height: 460px;
-  outline: none;
-  color: rgb(255, 255, 255);
-  border: 1px solid rgb(255, 255, 255);
-  background: rgba(0, 0, 0, 0.9);
-  padding: 10px;
+  .key {
+    color: rgb(150, 150, 150);
+  }
 
-  font-family: Consolas, monaco, monospace;
+  .help-overlay__inside {
+    position: absolute;
+    left: calc(50% - 300px);
+    top: calc(50% - 200px);
+    width: 600px;
+    height: 400px;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
 
-  header {
-    h1 {
-      font-size: 1.8em;
-      margin-bottom: 1em;
+    .help-overlay__inside__top {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 20px;
     }
 
-    h2 {
-      font-size: 1.2em;
-      margin-bottom: 2em;
+    .help-overlay__inside__mid-left {
+      font-size: 0.9em;
+      display: inline-block;
+      width: 50%;
+      margin-bottom: 20px;
+    }
+
+    .help-overlay__inside__mid-right {
+      font-size: 10pt;
+      display: inline-block;
+      width: 50%;
+    }
+
+    .help-overlay__inside__bottom {
+      font-size: 0.7em;
+      display: inline-block;
+      width: 100%;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+
+      span {
+        display: inline-block;
+      }
+
+      span:not(:last-child):after {
+        content: '|';
+        margin: 0 0.5em 0 0.5em;
+      }
+
+      a {
+        text-decoration: none;
+        color: rgb(100, 100, 255);
+      }
     }
   }
 
   h1 {
+    text-align: center;
     font-size: 1.2em;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
+  }
+
+  p {
+    margin-bottom: 1em;
   }
 
   dl {
@@ -55,25 +86,17 @@ div#help-panel {
       grid-column-start: 2;
     }
   }
+}
+
+div#help-panel {
 
   footer {
     position: absolute;
     bottom: 10px;
     font-size: 0.8em;
+    display: flex;
+    justify-content: space-between;
 
-    span {
-      display: inline-block;
-    }
 
-    span:not(:last-child):after {
-      content: '|';
-      margin: 0 0.5em 0 0.5em;
-    }
-
-    a {
-      text-decoration: none;
-      color: rgb(100, 100, 255);
-    }
   }
 }
-

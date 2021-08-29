@@ -6,7 +6,7 @@ import { parameters } from "parameters";
 import { render } from "mandelbrot";
 import { query } from "query";
 import 'reset-css';
-import './App.css';
+import './App.scss';
 
 function App() {
   const mandelbrotRef = useRef(null);
@@ -234,10 +234,12 @@ function App() {
       <div>
         <canvas
           id="mandelbrot"
+          className="fullscreen-overlay"
           ref={mandelbrotRef}
         />
         <canvas
           id="interaction"
+          className="fullscreen-overlay"
           ref={interactionRef}
           tabIndex={0}
           onKeyDown={handleKeyDown}
