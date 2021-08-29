@@ -11,7 +11,7 @@
     left: calc(50% - 300px);
     top: calc(50% - 200px);
     width: 600px;
-    height: 400px;
+    height: 420px;
     color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
     background: rgba(0, 0, 0, 0.9);
@@ -73,7 +73,6 @@
   dl {
     display: grid;
     grid-template-columns: max-content auto;
-    margin-bottom: 1em;
 
     dt {
       grid-column-start: 1;

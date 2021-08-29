@@ -42,6 +42,9 @@ const Help = () => (
 
           <dt>T / Y</dt>
           <dd>Palette selection</dd>
+
+          <dt>U</dt>
+          <dd>Toggle coloring method</dd>
         </dl>
       </div>
 

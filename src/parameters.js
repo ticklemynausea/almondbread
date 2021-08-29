@@ -2,18 +2,20 @@ import { rescale } from "math";
 import { palettes } from "colors";
 import { update } from "query";
 
-const parameters = ({ wind0w, palette, iterations }) => ({
+const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
   wind0w: wind0w || { x0: -2.5, y0: 1.5, x1: 1, y1: -1.5 },
   iterations: iterations || 250,
   workers: 5,
+  palette: palette || 2,
+  coloringMethod: coloringMethod || "lerp",
   stack: [],
-  palette: palette || 0,
 
   updateSearch() {
     update({
       wind0w: this.wind0w,
       palette: this.palette,
       iterations: this.iterations,
+      coloringMethod: this.coloringMethod,
     });
   },
 
@@ -99,6 +101,13 @@ const parameters = ({ wind0w, palette, iterations }) => ({
     if (this.workers + i > 0) {
       this.workers += i;
     }
+  },
+
+  toggleColoringMethod: function() {
+    const methods = ["lerp", "repeat"];
+    this.coloringMethod = methods[(methods.indexOf(this.coloringMethod) + 1) % methods.length];
+
+    this.updateSearch();
   },
 
   recolor: function(i) {

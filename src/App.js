@@ -122,6 +122,9 @@ function App() {
         parameters.recolor(1);
         break;
 
+      case "KeyU":
+        parameters.toggleColoringMethod();
+        break;
 
       case "KeyH":
         toggleHelp();

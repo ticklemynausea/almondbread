@@ -1,9 +1,9 @@
+import interpolate from "color-interpolate";
 
 const hex2rgb = (palette) => palette
   .map((p) => [p.substr(0, 2), p.substr(2, 2), p.substr(4, 2)].map((p) => parseInt(p, 16)));
 
 const palettes = [
-    ["421E0F", "19071A", "09012F", "040449", "000764", "0C2C8A", "1852B1", "397DD1", "86B5E5", "D3ECF8", "F1E9BF", "F8C95F", "FFAA00", "CC8000", "995700", "6A3403"],
     ["FEC5BB", "FCD5CE", "FAE1DD", "F8EDEB", "E8E8E4", "D8E2DC", "ECE4DB", "FFE5D9", "FFD7BA", "FEC89A"],
     ["F72585", "B5179E", "7209B7", "560BAD", "480CA8", "3A0CA3", "3F37C9", "4361EE", "4895EF", "4CC9F0"],
     ["03071E", "370617", "6A040F", "9D0208", "D00000", "DC2F02", "E85D04", "F48C06", "FAA307", "FFBA08"],
@@ -39,16 +39,30 @@ const palettes = [
     ["E2E2DF", "D2D2CF", "E2CFC4", "F7D9C4", "FAEDCB", "C9E4DE", "C6DEF1", "DBCDF0", "F2C6DE", "F9C6C9"],
     ["DEC9E9", "DAC3E8", "D2B7E5", "C19EE0", "B185DB", "A06CD5", "9163CB", "815AC0", "7251B5", "6247AA"],
     ["E03615", "E24C16", "E46217", "E67818", "E88D18", "ECB81A", "EECE1B", "EFD91B", "F0DE1B", "F0E31B"],
+    ["421E0F", "19071A", "09012F", "040449", "000764", "0C2C8A", "1852B1", "397DD1", "86B5E5", "D3ECF8", "F1E9BF", "F8C95F", "FFAA00", "CC8000", "995700", "6A3403", "000000"],
 ].map(hex2rgb);
 
-const mapColors = (iterations, paletteIndex) => Array.from({ length: iterations + 1 }, (_, iteration) => {
-  if (iteration === iterations) {
-    return [0, 0, 0];
+const mapColors = (iterations, paletteIndex, coloringMethod) => {
+  const palette = palettes[paletteIndex];
+  const interpolated = coloringMethod === "lerp" || coloringMethod === "smoothstep" ?
+    interpolate(palette, coloringMethod) :
+    null;
+
+  const mappedColors = [];
+  for (let iteration = 0; iteration <= iterations; iteration++) {
+    if (coloringMethod === "lerp" || coloringMethod === "smoothstep") {
+      const rgb = interpolated(iteration/iterations);
+      const color = rgb.replace(/[^\d,]/g, '').split(',').map((n) => parseInt(n));
+
+      mappedColors.push(color);
+    } else  {
+      const color = palette[iteration % palette.length];
+
+      mappedColors.push(color);
+    }
   }
 
-  const palette = palettes[paletteIndex];
-
-  return palette[iteration % palette.length];
-});
+  return mappedColors;
+};
 
 export { mapColors, palettes };

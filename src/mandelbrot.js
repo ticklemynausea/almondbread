@@ -55,14 +55,14 @@ const assemble = (parts, colors) => {
   return data;
 }
 
-const imageData = async (width, height, palette, wind0w, workers, iterations) => {
+const imageData = async (width, height, palette, coloringMethod, wind0w, workers, iterations) => {
   const tag = `calculating ${width}x${height} values
 top left ${wind0w.x0}+${wind0w.y0}i
 bottom right ${wind0w.x1}+${wind0w.y1}i
 with ${workers} workers up to ${iterations} iterations`;
 
   const parts = await timingAsync(tag, () => parallelize(width, height, wind0w, workers, iterations));
-  const colors = mapColors(iterations, palette);
+  const colors = mapColors(iterations, palette, coloringMethod);
   const data = timing(`assembling ${parts.length} parts`, () => assemble(parts, colors));
   const imageData = new ImageData(data, width, height);
 
@@ -74,6 +74,7 @@ const render = async (canvas, parameters) => {
     canvas.width,
     canvas.height,
     parameters.palette,
+    parameters.coloringMethod,
     parameters.wind0w,
     parameters.workers,
     parameters.iterations,
