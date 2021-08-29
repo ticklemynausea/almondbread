@@ -1,5 +1,5 @@
 import { rescale } from "math";
-import { palettes } from "mandelbrot";
+import { palettes } from "colors";
 import { update } from "query";
 
 const parameters = ({ wind0w, palette, iterations }) => ({
