@@ -2,7 +2,7 @@ import qs from "qs";
 import { mapValues } from "lodash";
 
 const query = () => {
-  const obj = qs.parse(atob(window.location.search.substring(1)));
+  const obj = qs.parse(window.location.search.substring(1));
 
   if (obj.wind0w) {
     obj.wind0w = mapValues(obj.wind0w, parseFloat);
@@ -20,7 +20,7 @@ const query = () => {
 }
 
 const update = (parameters) => {
-  const search = btoa(qs.stringify(parameters));
+  const search = qs.stringify(parameters);
   window.history.pushState(null, null, `?${search}`);
 }
 

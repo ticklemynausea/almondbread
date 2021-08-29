@@ -35,6 +35,11 @@ function App() {
     renderCanvas();
 
     window.addEventListener("resize", debounce(handleResize, 100));
+
+    window.onpopstate = function(event) {
+      parametersRef.current = parameters(query());
+      renderCanvas();
+    };
   });
 
   const handleKeyDown = (event) => {
