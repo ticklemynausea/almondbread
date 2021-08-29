@@ -40,6 +40,10 @@ function App() {
   const handleKeyDown = (event) => {
     const parameters = parametersRef.current;
 
+    if (event.altKey || event.ctrlKey || event.metaKey) {
+      return;
+    }
+
     switch (event.code) {
       case "ArrowUp":
         parameters.pan(0, -1);
