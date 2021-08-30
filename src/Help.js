@@ -2,6 +2,7 @@ import "Help.scss";
 
 const handleClick = (e) => {
   document.getElementById("help").style.display = "none";
+  document.getElementById("mandelbrot").focus();
 };
 
 const Help = () => (

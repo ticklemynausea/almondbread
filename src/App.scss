@@ -22,3 +22,18 @@ canvas {
     z-index: 1;
   }
 }
+
+div#status {
+  position: fixed;
+  font-size: 12px;
+  right: 12px;
+  bottom: 12px;
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 1);
+  color: rgba(255, 255, 255, 1);
+  mix-blend-mode: difference;
+
+  p {
+    text-align: right;
+  }
+}

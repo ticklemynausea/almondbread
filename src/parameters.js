@@ -1,12 +1,13 @@
 import { rescale } from "math";
 import { palettes } from "colors";
 import { update } from "query";
+import { message } from "status";
 
 const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
-  wind0w: wind0w || { x0: -2.5, y0: 1.5, x1: 1, y1: -1.5 },
+  wind0w: wind0w || { x0: -2.85, y0: 1.5, x1: 1.35, y1: -1.5 },
   iterations: iterations || 250,
   workers: 5,
-  palette: palette || 2,
+  palette: palette || 0,
   coloringMethod: coloringMethod || "lerp",
   stack: [],
 
@@ -34,6 +35,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       y1: y1,
     }
 
+    message("selection zoom", this.wind0w);
     this.updateSearch();
   },
 
@@ -51,6 +53,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       y1: this.wind0w.y1 + dy,
     }
 
+    message("panning", this.wind0w);
     this.updateSearch();
   },
 
@@ -59,6 +62,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.wind0w = this.stack.pop();
     }
 
+    message("undo last change", this.wind0w);
     this.updateSearch();
   },
 
@@ -76,6 +80,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       y1: this.wind0w.y1 + dy,
     }
 
+    message("zoom / rescale", this.wind0w);
     this.updateSearch();
   },
 
@@ -86,6 +91,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.iterations = 255;
     this.workers = 5;
 
+    message("reset", this.wind0w);
     this.updateSearch();
   },
 
@@ -94,6 +100,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.iterations += i;
     }
 
+    message(`max iterations: ${this.iterations}`, this.wind0w);
     this.updateSearch();
   },
 
@@ -101,12 +108,15 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     if (this.workers + i > 0) {
       this.workers += i;
     }
+
+    message(`max worker threads: ${this.workers}`, this.wind0w);
   },
 
   toggleColoringMethod: function() {
     const methods = ["lerp", "repeat"];
     this.coloringMethod = methods[(methods.indexOf(this.coloringMethod) + 1) % methods.length];
 
+    message(`coloring method: ${this.coloringMethod}`, this.wind0w);
     this.updateSearch();
   },
 
@@ -119,6 +129,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.palette = 0;
     }
 
+    message(`palette: ${this.palette}`, this.wind0w);
     this.updateSearch();
   },
 });

@@ -5,6 +5,7 @@ import Help from "Help";
 import { parameters } from "parameters";
 import { render } from "mandelbrot";
 import { query } from "query";
+import { message, clear } from "status";
 import 'reset-css';
 import './App.scss';
 
@@ -32,13 +33,16 @@ function App() {
 
     parametersRef.current = parameters(query());
 
-    renderCanvas();
+    message("welcome!", parametersRef.current.wind0w);
+    renderCanvas().then(clear);
 
     window.addEventListener("resize", debounce(handleResize, 100));
 
     window.onpopstate = function(event) {
       parametersRef.current = parameters(query());
-      renderCanvas();
+
+      message("going back", parametersRef.current.wind0w);
+      renderCanvas().then(clear);
     };
   });
 
@@ -79,7 +83,7 @@ function App() {
         break;
 
       case "KeyS":
-        parameters.changeIterations(100);
+        parameters.changeIterations(50);
         break;
 
      case "KeyZ":
@@ -134,7 +138,7 @@ function App() {
         return;
     }
 
-    renderCanvas();
+    renderCanvas().then(clear);
   }
 
   const handleMouseDown = (e) => {
@@ -166,8 +170,8 @@ function App() {
       y1: e.pageY,
     };
 
-    ctx.strokeStyle = "rgba(0, 0, 0, 0.4)";
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = "rgb(0, 0, 0, 0.9)";
+    ctx.lineWidth = 1;
     ctx.strokeRect(
       dragZoom.x0,
       dragZoom.y0,
@@ -214,7 +218,7 @@ function App() {
       interactionRef.current.height,
     );
 
-    renderCanvas();
+    renderCanvas().then(clear);
   }
 
   const handleResize = (e) => {
@@ -252,6 +256,7 @@ function App() {
           onMouseUp={handleMouseUp}
         />
       </div>
+      <div id="status" />
     </>
   );
 }
