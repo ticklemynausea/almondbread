@@ -1,8 +1,18 @@
 import { wrap } from "comlink";
+import { clone, pull } from "lodash";
 
 import Worker from "mandelbrot.worker.js";
 import { timing, timingAsync } from "timing";
 import { mapColors } from "colors";
+
+const liveWorkers = [];
+
+const stopWorkers = () => {
+  clone(liveWorkers).forEach((worker) => {
+    worker.terminate();
+    pull(liveWorkers, worker);
+  });
+}
 
 const parallelize = async (width, height, wind0w, workers, iterations) => {
   const imageLength = width * height;
@@ -18,7 +28,10 @@ const parallelize = async (width, height, wind0w, workers, iterations) => {
   });
 
   const results = await Promise.all(partitions.map(async ([start, end]) => {
-    const workerObj = wrap(new Worker());
+    const worker = new Worker();
+    liveWorkers.push(worker);
+
+    const workerObj = wrap(worker);
 
     await workerObj.calculate(
       width,
@@ -28,7 +41,11 @@ const parallelize = async (width, height, wind0w, workers, iterations) => {
       iterations,
     );
 
-    return await workerObj.data;
+    const data = await workerObj.data;
+
+    pull(liveWorkers, worker);
+
+    return data;
   }));
 
   return results;
@@ -69,6 +86,8 @@ with ${workers} workers up to ${iterations} iterations`;
 }
 
 const render = async (canvas, parameters) => {
+  stopWorkers();
+
   let data = await imageData(
     canvas.width,
     canvas.height,
