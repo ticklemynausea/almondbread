@@ -5,30 +5,19 @@ const HelpLayer = ({ toggleHelp }) => (
     <div className="help-overlay__inside">
       <div className="help-overlay__inside__top">
         <h1>Almondbread</h1>
-        <p>Yet another mandelbrot fractal explorer.</p>
+        <p>Yet another mandelbrot fractal explorer, with pretty colors and nifty features.</p>
+        <p>No touch controls available yet, a computer with keyboard and mouse is needed for now.</p>
       </div>
 
 
+      <h1>Controls</h1>
       <div className="help-overlay__inside__mid-left">
-        <h1>Keyboard controls</h1>
         <dl>
           <dt>Arrows</dt>
           <dd>Pan around</dd>
 
           <dt>Q / W</dt>
           <dd>Zoom in/out</dd>
-
-          <dt>A / S</dt>
-          <dd>Max iterations - / +</dd>
-
-          <dt>Z / X</dt>
-          <dd>Web workers - / +</dd>
-
-          <dt>E</dt>
-          <dd>Undo last action</dd>
-
-          <dt>R</dt>
-          <dd>Reset to initial state</dd>
 
           <dt>D / F</dt>
           <dd>Horizontal scale - / +</dd>
@@ -45,14 +34,28 @@ const HelpLayer = ({ toggleHelp }) => (
       </div>
 
       <div className="help-overlay__inside__mid-right">
-        <h1>Mouse controls</h1>
         <dl>
           <dt>Selection</dt>
           <dd>Zoom on selected area</dd>
+
+          <dt>A / S</dt>
+          <dd>Max iterations - / +</dd>
+
+          <dt>Z / X</dt>
+          <dd>Web workers - / +</dd>
+
+          <dt>E</dt>
+          <dd>Undo last action</dd>
+
+          <dt>R</dt>
+          <dd>Reset to initial state</dd>
+
+          <dt>F</dt>
+          <dd>Download image</dd>
         </dl>
       </div>
 
-      <p>Press <span className="key">H</span> to toggle this overlay</p>
+      <p className="center">Press <span className="key">H</span> to toggle this overlay</p>
 
       <div className="help-overlay__inside__bottom">
         <span>

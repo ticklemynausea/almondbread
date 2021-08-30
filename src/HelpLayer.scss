@@ -2,6 +2,10 @@
   z-index: 3;
   background-color: rgba(0, 0, 0, 0.5);
 
+  .center {
+    text-align: center;
+  }
+
   .key {
     color: rgb(150, 150, 150);
   }
@@ -11,7 +15,7 @@
     left: calc(50% - 300px);
     top: calc(50% - 200px);
     width: 600px;
-    height: 420px;
+    height: 400px;
     color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
     background: rgba(0, 0, 0, 0.9);
@@ -20,18 +24,23 @@
     .help-overlay__inside__top {
       display: inline-block;
       width: 100%;
-      margin-bottom: 20px;
+
+      p {
+        font-size: 0.8em;
+      }
+
+      margin-bottom: 1em;
     }
 
     .help-overlay__inside__mid-left {
-      font-size: 0.9em;
+      font-size: 0.8em;
       display: inline-block;
       width: 50%;
-      margin-bottom: 20px;
+      margin-bottom: 3em;
     }
 
     .help-overlay__inside__mid-right {
-      font-size: 10pt;
+      font-size: 0.8em;
       display: inline-block;
       width: 50%;
     }
@@ -67,7 +76,8 @@
   }
 
   p {
-    margin-bottom: 1em;
+    line-height: 1.2em;
+    margin-bottom: 1.2em;
   }
 
   dl {
@@ -84,18 +94,5 @@
     dd {
       grid-column-start: 2;
     }
-  }
-}
-
-div#help-panel {
-
-  footer {
-    position: absolute;
-    bottom: 10px;
-    font-size: 0.8em;
-    display: flex;
-    justify-content: space-between;
-
-
   }
 }
