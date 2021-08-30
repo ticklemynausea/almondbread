@@ -4,7 +4,6 @@ import Worker from "mandelbrot.worker.js";
 import { timing, timingAsync } from "timing";
 import { mapColors } from "colors";
 
-
 const parallelize = async (width, height, wind0w, workers, iterations) => {
   const imageLength = width * height;
   const sliceSize = Math.floor(imageLength / workers);
@@ -62,7 +61,7 @@ bottom right ${wind0w.x1}+${wind0w.y1}i
 with ${workers} workers up to ${iterations} iterations`;
 
   const parts = await timingAsync(tag, () => parallelize(width, height, wind0w, workers, iterations));
-  const colors = mapColors(iterations, palette, coloringMethod);
+  const colors = timing(`generating palette`, () => mapColors(iterations, palette, coloringMethod));
   const data = timing(`assembling ${parts.length} parts`, () => assemble(parts, colors));
   const imageData = new ImageData(data, width, height);
 

@@ -1,11 +1,11 @@
-import "Help.scss";
+import "HelpLayer.scss";
 
 const handleClick = (e) => {
   document.getElementById("help").style.display = "none";
   document.getElementById("interaction").focus();
 };
 
-const Help = () => (
+const HelpLayer = () => (
   <div id="help" className="help-overlay fullscreen-overlay" onClick={handleClick}>
     <div className="help-overlay__inside">
       <div className="help-overlay__inside__top">
@@ -74,4 +74,4 @@ const Help = () => (
   </div>
 );
 
-export default Help;
+export default HelpLayer;

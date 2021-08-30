@@ -10,7 +10,6 @@ const message = (str, wind0w) => {
     timer = window.performance.now();
   }
 
-  console.log(msg);
   addmsg(msg);
 };
 
@@ -21,16 +20,17 @@ const clear = () => {
   timer = null;
 
   timeout = setTimeout(() => {
-    document.getElementById("status").replaceChildren([]);
-    document.getElementById("status").style.display = "none";
+    document.getElementById("status-layer").replaceChildren([]);
+    document.getElementById("status-layer").style.display = "none";
   }, 4000);
 }
 
 const addmsg = (msg) => {
-  document.getElementById("status").style.display = "table-cell";
+  console.log(msg);
+  document.getElementById("status-layer").style.display = "table-cell";
   const p = document.createElement("p")
   p.innerText = msg;
-  document.getElementById("status").append(p);
+  document.getElementById("status-layer").append(p);
 }
 
 export { message, clear };
