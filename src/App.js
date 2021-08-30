@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import { debounce } from "lodash";
+import { useEffect, useRef, useState } from "react";
 
 import InteractionLayer from "InteractionLayer";
 import MandelbrotLayer from "MandelbrotLayer";
@@ -9,35 +8,35 @@ import { parameters } from "parameters";
 import { render } from "mandelbrot";
 import { query } from "query";
 import { message, clear } from "status";
+import withWindowSize from "withWindowSize";
 import 'reset-css';
 import './App.scss';
 
-function App() {
+function App({ windowSize }) {
   const parametersRef = useRef(null);
   const mandelbrotRef = useRef(null);
   const interactionRef = useRef(null);
 
+  const [showHelp, setShowHelp] = useState(true);
+
   const renderMandelbrot = () => render(mandelbrotRef.current, parametersRef.current);
 
   useEffect(() => {
-    parametersRef.current = parameters(query());
-
-    message("welcome!", parametersRef.current.wind0w);
-    renderMandelbrot().then(clear);
-
-    window.addEventListener("resize", debounce(handleResize, 100));
+    if (parametersRef.current == null) {
+      parametersRef.current = parameters(query());
+    }
 
     window.onpopstate = handlePopState;
   });
 
-  const handleResize = (e) => {
-    interactionRef.current.width = interactionRef.current.clientWidth;
-    interactionRef.current.height = interactionRef.current.clientHeight;
-    mandelbrotRef.current.width = mandelbrotRef.current.clientWidth;
-    mandelbrotRef.current.height = mandelbrotRef.current.clientHeight;
+  useEffect(() => {
+    interactionRef.current.width = windowSize.windowWidth;
+    interactionRef.current.height = windowSize.windowHeight;
+    mandelbrotRef.current.width = windowSize.windowWidth;
+    mandelbrotRef.current.height = windowSize.windowHeight
 
     renderMandelbrot();
-  };
+  }, [windowSize]);
 
   const handlePopState = (event)  => {
     parametersRef.current = parameters(query());
@@ -46,16 +45,24 @@ function App() {
     renderMandelbrot().then(clear);
   };
 
+  const toggleHelp = () => {
+    setShowHelp(!showHelp);
+  }
+
   return (
     <>
-      <HelpLayer />
+      {showHelp && <HelpLayer
+        toggleHelp={toggleHelp}
+      />}
       <MandelbrotLayer
+        parametersRef={parametersRef}
         mandelbrotRef={mandelbrotRef}
       />
       <InteractionLayer
-        interactionRef={interactionRef}
         parametersRef={parametersRef}
         mandelbrotRef={mandelbrotRef}
+        interactionRef={interactionRef}
+        toggleHelp={toggleHelp}
         renderMandelbrot={renderMandelbrot}
       />
       <StatusLayer />
@@ -63,4 +70,4 @@ function App() {
   );
 }
 
-export default App;
+export default withWindowSize(App);

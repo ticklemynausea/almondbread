@@ -1,12 +1,7 @@
 import "HelpLayer.scss";
 
-const handleClick = (e) => {
-  document.getElementById("help").style.display = "none";
-  document.getElementById("interaction").focus();
-};
-
-const HelpLayer = () => (
-  <div id="help" className="help-overlay fullscreen-overlay" onClick={handleClick}>
+const HelpLayer = ({ toggleHelp }) => (
+  <div id="help" className="help-overlay fullscreen-overlay" onClick={toggleHelp}>
     <div className="help-overlay__inside">
       <div className="help-overlay__inside__top">
         <h1>Almondbread</h1>

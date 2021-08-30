@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 
 import { clear } from "status";
 
@@ -7,6 +7,7 @@ const InteractionLayer = ({
   parametersRef,
   mandelbrotRef,
   renderMandelbrot,
+  toggleHelp,
 }) => {
   let dragZoom = {};
 
@@ -17,16 +18,6 @@ const InteractionLayer = ({
     interactionRef.current.focus();
   });
 
-  const toggleHelp = (e) => {
-    const div = document.getElementById("help");
-
-    if (div.style.display === "none") {
-      div.style.display = "block";
-    } else {
-      div.style.display = "none";
-    }
-  }
-
   const handleKeyDown = (event) => {
     const parameters = parametersRef.current;
 
@@ -36,19 +27,19 @@ const InteractionLayer = ({
 
     switch (event.code) {
       case "ArrowUp":
-        parameters.pan(0, -1);
-        break;
-
-      case "ArrowDown":
         parameters.pan(0, 1);
         break;
 
+      case "ArrowDown":
+        parameters.pan(0, -1);
+        break;
+
       case "ArrowLeft":
-        parameters.pan(1, 0);
+        parameters.pan(-1, 0);
         break;
 
       case "ArrowRight":
-        parameters.pan(-1, 0);
+        parameters.pan(1, 0);
         break;
 
       case "KeyQ":
@@ -217,4 +208,4 @@ const InteractionLayer = ({
   );
 };
 
-export default InteractionLayer;
+export default memo(InteractionLayer);
