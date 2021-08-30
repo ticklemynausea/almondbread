@@ -7,7 +7,6 @@ import StatusLayer from "StatusLayer";
 import { parameters } from "parameters";
 import { render } from "mandelbrot";
 import { query } from "query";
-import { message, clear } from "status";
 import withWindowSize from "withWindowSize";
 import 'reset-css';
 import './App.scss';
@@ -41,8 +40,7 @@ function App({ windowSize }) {
   const handlePopState = (event)  => {
     parametersRef.current = parameters(query());
 
-    message("going back", parametersRef.current.wind0w);
-    renderMandelbrot().then(clear);
+    renderMandelbrot();
   };
 
   const toggleHelp = () => {

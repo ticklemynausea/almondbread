@@ -3,9 +3,11 @@ import { clone, pull } from "lodash";
 
 import Worker from "mandelbrot.worker.js";
 import { timing, timingAsync } from "timing";
+import { message } from "status";
 import { mapColors } from "colors";
 
 const liveWorkers = [];
+let timer = null;
 
 const stopWorkers = () => {
   clone(liveWorkers).forEach((worker) => {
@@ -86,6 +88,11 @@ with ${workers} workers up to ${iterations} iterations`;
 }
 
 const render = async (canvas, parameters) => {
+  timer = window.performance.now();
+
+  const { x0, y0, x1, y1 } = parameters.wind0w;
+  message(`rendering area ${x0}${y0 < 0 ? '-' : '+'}${Math.abs(y0)}i to ${x1}${y1 < 0 ? '-' : '+'}${Math.abs(y1)}i`)
+
   stopWorkers();
 
   let data = await imageData(
@@ -101,6 +108,9 @@ const render = async (canvas, parameters) => {
   let ctx = canvas.getContext("2d");
 
   ctx.putImageData(data, 0, 0);
+
+  const result = window.performance.now() - timer;
+  message(`rendered in ${result}ms`)
 }
 
 export { render };

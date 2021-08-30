@@ -35,7 +35,6 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       y1: y1,
     }
 
-    message("selection zoom", this.wind0w);
     this.updateSearch();
   },
 
@@ -53,7 +52,6 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       y1: this.wind0w.y1 + dy,
     }
 
-    message("panning", this.wind0w);
     this.updateSearch();
   },
 
@@ -62,7 +60,6 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.wind0w = this.stack.pop();
     }
 
-    message("undo last change", this.wind0w);
     this.updateSearch();
   },
 
@@ -80,7 +77,6 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       y1: this.wind0w.y1 + dy,
     }
 
-    message("zoom / rescale", this.wind0w);
     this.updateSearch();
   },
 
@@ -91,7 +87,6 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.iterations = 255;
     this.workers = 5;
 
-    message("reset", this.wind0w);
     this.updateSearch();
   },
 
@@ -100,7 +95,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.iterations += i;
     }
 
-    message(`max iterations: ${this.iterations}`, this.wind0w);
+    message(`set max iterations: ${this.iterations}`);
     this.updateSearch();
   },
 
@@ -109,14 +104,14 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.workers += i;
     }
 
-    message(`max worker threads: ${this.workers}`, this.wind0w);
+    message(`set max worker threads: ${this.workers}`);
   },
 
   toggleColoringMethod: function() {
     const methods = ["lerp", "repeat"];
     this.coloringMethod = methods[(methods.indexOf(this.coloringMethod) + 1) % methods.length];
 
-    message(`coloring method: ${this.coloringMethod}`, this.wind0w);
+    message(`set coloring method: ${this.coloringMethod}`);
     this.updateSearch();
   },
 
@@ -129,7 +124,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.palette = 0;
     }
 
-    message(`palette: ${this.palette}`, this.wind0w);
+    message(`set palette: ${this.palette}`);
     this.updateSearch();
   },
 });

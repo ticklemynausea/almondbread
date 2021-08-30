@@ -1,7 +1,5 @@
 import { memo, useEffect } from "react";
 
-import { clear } from "status";
-
 const InteractionLayer = ({
   interactionRef,
   parametersRef,
@@ -110,7 +108,7 @@ const InteractionLayer = ({
         return;
     }
 
-    renderMandelbrot().then(clear);
+    renderMandelbrot();
   }
 
   const handleMouseDown = (e) => {
@@ -190,7 +188,7 @@ const InteractionLayer = ({
       interactionRef.current.height,
     );
 
-    renderMandelbrot().then(clear);
+    renderMandelbrot();
   }
 
 
