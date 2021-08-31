@@ -1,14 +1,6 @@
 import { memo, useEffect } from "react";
 
-const download = (wind0w) => {
-  const { x0, y0, x1, y1 } = wind0w;
-  const filename = `${x0}${y0 < 0 ? '-' : '+'}${Math.abs(y0)}i to ${x1}${y1 < 0 ? '-' : '+'}${Math.abs(y1)}i.png`
-
-  const link = document.createElement('a');
-  link.download = filename;
-  link.href = document.getElementById('mandelbrot').toDataURL();
-  link.click();
-}
+import { download, filename } from "canvas";
 
 const InteractionLayer = ({
   interactionRef,
@@ -117,7 +109,7 @@ const InteractionLayer = ({
         return;
 
       case "KeyG":
-        download(parameters.wind0w);
+        download(filename(parameters.wind0w));
         return;
 
       default:
