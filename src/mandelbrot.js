@@ -4,6 +4,7 @@ import { clone, pull } from "lodash";
 import Worker from "mandelbrot.worker.js";
 import { timing, timingAsync } from "timing";
 import { message } from "status";
+import { xy2cpx } from "math";
 import { mapColors } from "colors";
 
 const liveWorkers = [];
@@ -91,7 +92,7 @@ const render = async (canvas, parameters) => {
   timer = window.performance.now();
 
   const { x0, y0, x1, y1 } = parameters.wind0w;
-  message(`rendering area ${x0}${y0 < 0 ? '-' : '+'}${Math.abs(y0)}i to ${x1}${y1 < 0 ? '-' : '+'}${Math.abs(y1)}i`)
+  message(`rendering area ${xy2cpx(x0, y0)} to ${xy2cpx(x1, y1)}}`)
 
   stopWorkers();
 

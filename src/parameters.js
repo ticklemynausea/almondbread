@@ -91,7 +91,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
   },
 
   changeIterations: function(i) {
-    if (this.iterations + i >= 0) {
+    if (this.iterations + i > 0) {
       this.iterations += i;
     }
 

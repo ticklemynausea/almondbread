@@ -33,37 +33,39 @@ const InteractionLayer = ({
       return;
     }
 
+    let moveDelta = event.shiftKey ? 0.1 : 1;
+    let iterDelta = event.shiftKey ? 5 : 50;
     switch (event.code) {
       case "ArrowUp":
-        parameters.pan(0, 1);
+        parameters.pan(0, moveDelta);
         break;
 
       case "ArrowDown":
-        parameters.pan(0, -1);
+        parameters.pan(0, -moveDelta);
         break;
 
       case "ArrowLeft":
-        parameters.pan(-1, 0);
+        parameters.pan(-moveDelta, 0);
         break;
 
       case "ArrowRight":
-        parameters.pan(1, 0);
+        parameters.pan(moveDelta, 0);
         break;
 
       case "KeyQ":
-        parameters.zoom(-1, -1);
+        parameters.zoom(-moveDelta, -moveDelta);
         break;
 
       case "KeyW":
-        parameters.zoom(1, 1);
+        parameters.zoom(moveDelta, moveDelta);
         break;
 
       case "KeyA":
-        parameters.changeIterations(-50);
+        parameters.changeIterations(-iterDelta);
         break;
 
       case "KeyS":
-        parameters.changeIterations(50);
+        parameters.changeIterations(iterDelta);
         break;
 
      case "KeyZ":
@@ -83,19 +85,19 @@ const InteractionLayer = ({
         break;
 
       case "KeyD":
-        parameters.zoom(-1, 0);
+        parameters.zoom(-moveDelta, 0);
         break;
 
       case "KeyF":
-        parameters.zoom(1, 0);
+        parameters.zoom(moveDelta, 0);
         break;
 
       case "KeyC":
-        parameters.zoom(0, -1);
+        parameters.zoom(0, -moveDelta);
         break;
 
       case "KeyV":
-        parameters.zoom(0, 1);
+        parameters.zoom(0, moveDelta);
         break;
 
       case "KeyT":
