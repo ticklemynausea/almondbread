@@ -38,6 +38,9 @@ const HelpLayer = ({ toggleHelp }) => (
 
             <dt>U</dt>
             <dd>Toggle coloring method</dd>
+
+            <dt>B</dt>
+            <dd>Rescale around center</dd>
           </dl>
         </div>
 

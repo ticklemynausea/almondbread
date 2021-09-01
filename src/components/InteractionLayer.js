@@ -25,6 +25,7 @@ const InteractionLayer = ({
 
   const handleKeyDown = (event) => {
     const parameters = parametersRef.current;
+    const { width, height } = interactionRef.current;
 
     if (event.altKey || event.ctrlKey || event.metaKey) {
       return;
@@ -32,6 +33,7 @@ const InteractionLayer = ({
 
     let moveDelta = event.shiftKey ? 0.1 : 1;
     let iterDelta = event.shiftKey ? 5 : 50;
+
     switch (event.code) {
       case "ArrowUp":
         parameters.pan(0, moveDelta);
@@ -101,6 +103,10 @@ const InteractionLayer = ({
         parameters.zoom(0, moveDelta);
         break;
 
+      case "KeyB":
+        parameters.refit(width, height);
+        break;
+
       case "KeyT":
         parameters.recolor(-1);
         setAction(`set palette: ${parameters.palette}`);
@@ -127,6 +133,7 @@ const InteractionLayer = ({
       default:
         return;
     }
+    console.log(parameters.wind0w);
 
     debouncedRender();
   }

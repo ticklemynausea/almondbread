@@ -1,9 +1,11 @@
-import { rescale } from "math";
+import { rescale, depth } from "math";
 import { palettes } from "colors";
 import { update } from "query";
 
+const defaultWind0w =  { x0: -2.85, y0: 1.5, x1: 1.35, y1: -1.5 };
+
 const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
-  wind0w: wind0w || { x0: -2.85, y0: 1.5, x1: 1.35, y1: -1.5 },
+  wind0w: wind0w || defaultWind0w,
   iterations: iterations || 250,
   workers: 5,
   palette: palette || 0,
@@ -74,6 +76,37 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       y0: this.wind0w.y0 - dy,
       x1: this.wind0w.x1 - dx,
       y1: this.wind0w.y1 + dy,
+    }
+
+    this.updateSearch();
+  },
+
+  refit(width, height) {
+    this.stack.push(this.wind0w);
+
+    const { x0, y0, x1, y1 } = this.wind0w;
+    const cx =  (x0 + x1) / 2;
+    const cy =  (y0 + y1) / 2;
+    const dp = depth(x0, y0, x1, y1)
+
+    const ratiox = width / height;
+    const ratioy = height / width;
+
+    const dx = ratiox * Math.pow(10, dp);
+    const dy = ratioy * Math.pow(10, dp);
+
+    const { xa, ya, xb, yb } = {
+      xa: cx - dx,
+      ya: cy - dy,
+      xb: cx + dx,
+      yb: cy + dy,
+    };
+
+    this.wind0w = {
+      x0: xa < xb ? xa : xb,
+      y0: ya > yb ? ya : yb,
+      x1: xa > xb ? xa : xb,
+      y1: ya < yb ? ya : yb,
     }
 
     this.updateSearch();
