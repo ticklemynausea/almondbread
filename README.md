@@ -1,5 +1,7 @@
 # Almondbread
 
+Try this out at https://almondbread.ticklemynausea.net/
+
 **this document, as well as this project is a work in progress**
 
 *Mandel brot is german for almond bread.*
