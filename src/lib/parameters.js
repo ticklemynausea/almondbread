@@ -20,7 +20,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     });
   },
 
-  zoomInto: function(width, height, wx0, hy0, wx1, hy1) {
+  zoomInto(width, height, wx0, hy0, wx1, hy1) {
     this.stack.push(this.wind0w);
 
     let x0 = rescale(wx0, 0, width, this.wind0w.x0, this.wind0w.x1);
@@ -55,7 +55,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.updateSearch();
   },
 
-  undo: function() {
+  undo() {
     if (this.stack.length > 0) {
       this.wind0w = this.stack.pop();
     }
@@ -63,7 +63,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.updateSearch();
   },
 
-  zoom: function(ux, uy) {
+  zoom(ux, uy) {
     this.stack.push(this.wind0w);
 
     const zoomFactor = 10;
@@ -80,7 +80,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.updateSearch();
   },
 
-  reset: function() {
+  reset() {
     this.stack.push(this.wind0w);
 
     this.wind0w = { x0: -2.5, y0: 1.5, x1: 1, y1: -1.5 };
@@ -90,7 +90,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.updateSearch();
   },
 
-  changeIterations: function(i) {
+  changeIterations(i) {
     if (this.iterations + i > 0) {
       this.iterations += i;
     }
@@ -99,7 +99,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.updateSearch();
   },
 
-  changeWorkers: function(i) {
+  changeWorkers(i) {
     if (this.workers + i > 0) {
       this.workers += i;
     }
@@ -107,7 +107,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     message(`set max worker threads: ${this.workers}`);
   },
 
-  toggleColoringMethod: function() {
+  toggleColoringMethod() {
     const methods = ["lerp", "repeat"];
     this.coloringMethod = methods[(methods.indexOf(this.coloringMethod) + 1) % methods.length];
 
@@ -115,7 +115,7 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.updateSearch();
   },
 
-  recolor: function(i) {
+  recolor(i) {
     this.palette += i;
 
     if (this.palette < 0) {
@@ -128,6 +128,5 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     this.updateSearch();
   },
 });
-
 
 export { parameters };
