@@ -9,7 +9,7 @@ const HelpLayer = ({ toggleHelp }) => (
       <div className="help-overlay__inside__top">
         <h1 className="center">Almondbread</h1>
         <p>
-          A mandelbrot fractal explorer, with pretty colors and nifty features.
+          A Mandelbrot fractal explorer, with pretty colors and nifty features.
           It is also a work in progress.
         </p>
         <p>

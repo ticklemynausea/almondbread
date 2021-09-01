@@ -4,7 +4,7 @@
 
 *Mandel brot is german for almond bread.*
 
-A mandelbrot set renderer with nifty features. Explore the depths and infinite details of the mandelbrot set to the extent of the limits of javascript floating point numbers 😅
+A Mandelbrot set renderer with nifty features. Explore the depths and infinite details of the Mandelbrot set to the extent of the limits of javascript floating point numbers 😅
 
 
 ![](doc/1.jpeg)
