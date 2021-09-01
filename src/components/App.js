@@ -4,12 +4,13 @@ import InteractionLayer from "InteractionLayer";
 import MandelbrotLayer from "MandelbrotLayer";
 import HelpLayer from "HelpLayer";
 import StatusLayer from "StatusLayer";
+import withWindowSize from "withWindowSize";
 import { parameters } from "parameters";
 import { render } from "mandelbrot";
 import { query } from "query";
-import withWindowSize from "withWindowSize";
+
 import 'reset-css';
-import './App.scss';
+import 'App.scss';
 
 function App({ windowSize }) {
   const parametersRef = useRef(null);
