@@ -7,7 +7,6 @@ const InfoLayer = ({ wind0w, action, status }) => {
   const magy = Math.floor(Math.log10(Math.abs(y1 - y0)));
   const mag = magx > magy ? magx : magy;
 
-
   return (
     <div id="info-layer" className="fullscreen-overlay">
       <div className="coordinates">

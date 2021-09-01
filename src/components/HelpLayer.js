@@ -4,10 +4,10 @@ const README_URL = "https://github.com/ticklemynausea/almondbread/blob/master/RE
 const BLOGPOST_URL = "https://mariocarneiro.info/2021/08/30/almondbread-another-mandelbrot-fractal-renderer.html";
 
 const HelpLayer = ({ toggleHelp }) => (
-  <div id="help" className="help-overlay fullscreen-overlay" onClick={toggleHelp}>
+  <div id="help-layer" className="help-overlay fullscreen-overlay" onClick={toggleHelp}>
     <div className="help-overlay__inside">
       <div className="help-overlay__inside__top">
-        <h1>Almondbread</h1>
+        <h1 className="center">Almondbread</h1>
         <p>
           A mandelbrot fractal explorer, with pretty colors and nifty features.
           It is also a work in progress.
@@ -18,7 +18,7 @@ const HelpLayer = ({ toggleHelp }) => (
       </div>
 
       <div className="help-overlay__inside__mid">
-        <h1>Controls</h1>
+        <h2 className="center">Controls</h2>
         <div className="help-overlay__inside__mid-left">
           <dl>
             <dt>Arrows</dt>
@@ -67,15 +67,17 @@ const HelpLayer = ({ toggleHelp }) => (
       </div>
 
       <div className="help-overlay__inside__bottom">
-        <span>
-          <a href="http://github.com/ticklemynausea/almondbread">source code</a>
-        </span>
-        <span>
-          <a href="http://mariocarneiro.info/blog.html">tech blog</a>
-        </span>
-        <span>
-          <a href="http://mariocarneiro.info">mariocarneiro.info</a>
-        </span>
+        <ul className="center">
+          <li>
+            <a href="http://github.com/ticklemynausea/almondbread">source code</a>
+          </li>
+          <li>
+            <a href="http://mariocarneiro.info/blog.html">tech blog</a>
+          </li>
+          <li>
+            <a href="http://mariocarneiro.info">mariocarneiro.info</a>
+        </li>
+        </ul>
       </div>
     </div>
   </div>

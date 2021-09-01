@@ -9,7 +9,6 @@ import { parameters } from "parameters";
 import { render } from "mandelbrot";
 import { query } from "query";
 
-import 'reset-css';
 import 'App.scss';
 
 const setStateAndClear = (setState) => {
@@ -72,7 +71,7 @@ function App({ windowSize }) {
   }, [windowSize]);
 
   return (
-    <>
+    <div id="app">
       {showHelp && <HelpLayer
         toggleHelp={toggleHelp}
       />}
@@ -93,7 +92,7 @@ function App({ windowSize }) {
         renderMandelbrot={renderMandelbrot}
         setAction={setActionAndClear}
       />
-    </>
+    </div>
   );
 }
 

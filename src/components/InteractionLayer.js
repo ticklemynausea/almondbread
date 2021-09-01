@@ -2,6 +2,8 @@ import { memo, useEffect } from "react";
 
 import { download, filename } from "canvas";
 
+import "InteractionLayer.scss";
+
 const InteractionLayer = ({
   interactionRef,
   parametersRef,
@@ -209,16 +211,17 @@ const InteractionLayer = ({
 
 
   return (
-    <canvas
-      id="interaction"
-      className="fullscreen-overlay"
-      ref={interactionRef}
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-    />
+    <div id="interaction-layer" className="fullscreen-overlay">
+      <canvas
+        id="interaction"
+        ref={interactionRef}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      />
+    </div>
   );
 };
 

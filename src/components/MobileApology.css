@@ -1,0 +1,14 @@
+div#mobile-apology {
+  padding: 20px;
+
+  ul {
+    li {
+      padding-left: 0.5em;
+    }
+
+    li::before {
+      content: "—";
+      padding-right: 0.5em;
+    }
+  }
+}

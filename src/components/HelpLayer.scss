@@ -7,77 +7,44 @@
   align-items: center;
   justify-content: center;
 
-  .center {
-    text-align: center;
-  }
-
-  .key {
-    color: rgb(150, 150, 150);
-  }
 
   .help-overlay__inside {
-
-
     box-sizing: border-box;
+    padding: 20px;
     max-width: 600px;
 
-    color: rgb(255, 255, 255);
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(#000000, 0.8);
 
-    border: 1px solid rgb(255, 255, 255);
-    padding: 20px;
+    border: 1px solid #ffffff;
 
     .help-overlay__inside__top {
       display: inline-block;
       width: 100%;
+    }
 
-      p {
-        font-size: 0.8em;
+    .help-overlay__inside__mid {
+      .help-overlay__inside__mid-left,
+      .help-overlay__inside__mid-right {
+        display: inline-block;
+        width: 50%;
       }
-
-      margin-bottom: 1em;
-    }
-
-    .help-overlay__inside__mid-left {
-      font-size: 0.8em;
-      display: inline-block;
-      width: 50%;
-      margin-bottom: 3em;
-    }
-
-    .help-overlay__inside__mid-right {
-      font-size: 0.8em;
-      display: inline-block;
-      width: 50%;
     }
 
     .help-overlay__inside__bottom {
-      font-size: 0.7em;
       display: inline-block;
       width: 100%;
-      text-align: center;
-
-      span {
-        display: inline-block;
-      }
-
-      span:not(:last-child):after {
-        content: '|';
-        margin: 0 0.5em 0 0.5em;
-      }
-
     }
   }
 
-  h1 {
-    text-align: center;
-    font-size: 1.2em;
-    margin-bottom: 1em;
-  }
+  ul {
+    li {
+      display: inline-block;
+    }
 
-  p {
-    line-height: 1.5em;
-    margin-bottom: 1em;
+    li:not(:last-child)::after {
+      content: "|";
+      padding: 0 0.5em 0 0.5em;
+    }
   }
 
   dl {
@@ -87,16 +54,11 @@
     dt {
       grid-column-start: 1;
       color: rgb(150, 150, 150);
-      margin: 0 2em 0.5em 0;
+      padding: 0 2em 0.5em 0;
     }
 
     dd {
       grid-column-start: 2;
     }
-  }
-
-  a {
-    text-decoration: none;
-    color: rgb(150, 150, 255);
   }
 }

@@ -4,6 +4,8 @@ import { render } from "mandelbrot";
 import { parameters } from "parameters";
 import { query } from "query";
 
+import "MandelbrotLayer.scss";
+
 const MandelbrotLayer = ({
   mandelbrotRef,
   parametersRef,
@@ -22,11 +24,12 @@ const MandelbrotLayer = ({
   });
 
   return (
-    <canvas
-      id="mandelbrot"
-      className="fullscreen-overlay"
-      ref={mandelbrotRef}
-    />
+    <div id="mandelbrot-layer" className="fullscreen-overlay">
+      <canvas
+        id="mandelbrot"
+        ref={mandelbrotRef}
+      />
+    </div>
   );
 }
 
