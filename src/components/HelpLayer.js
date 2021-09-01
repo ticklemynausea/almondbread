@@ -58,7 +58,7 @@ const HelpLayer = ({ toggleHelp }) => (
             <dt>R</dt>
             <dd>Reset to initial state</dd>
 
-            <dt>F</dt>
+            <dt>G</dt>
             <dd>Download image</dd>
           </dl>
         </div>
