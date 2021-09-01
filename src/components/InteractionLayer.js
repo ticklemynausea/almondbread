@@ -8,6 +8,7 @@ const InteractionLayer = ({
   mandelbrotRef,
   renderMandelbrot,
   toggleHelp,
+  setAction,
 }) => {
   let dragZoom = {};
 
@@ -54,18 +55,22 @@ const InteractionLayer = ({
 
       case "KeyA":
         parameters.changeIterations(-iterDelta);
+        setAction(`set max iterations: ${parameters.iterations}`);
         break;
 
       case "KeyS":
         parameters.changeIterations(iterDelta);
+        setAction(`set max iterations: ${parameters.iterations}`);
         break;
 
      case "KeyZ":
         parameters.changeWorkers(-1);
+        setAction(`set max worker threads: ${parameters.workers}`);
         break;
 
       case "KeyX":
         parameters.changeWorkers(1);
+        setAction(`set max worker threads: ${parameters.workers}`);
         break;
 
       case "KeyE":
@@ -94,14 +99,17 @@ const InteractionLayer = ({
 
       case "KeyT":
         parameters.recolor(-1);
+        setAction(`set palette: ${parameters.palette}`);
         break;
 
       case "KeyY":
         parameters.recolor(1);
+        setAction(`set palette: ${parameters.palette}`);
         break;
 
       case "KeyU":
         parameters.toggleColoringMethod();
+        setAction(`set coloring method: ${parameters.coloringMethod}`);
         break;
 
       case "KeyH":

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import InteractionLayer from "InteractionLayer";
 import MandelbrotLayer from "MandelbrotLayer";
 import HelpLayer from "HelpLayer";
-import StatusLayer from "StatusLayer";
+import InfoLayer from "InfoLayer";
 import withWindowSize from "withWindowSize";
 import { parameters } from "parameters";
 import { render } from "mandelbrot";
@@ -12,14 +12,47 @@ import { query } from "query";
 import 'reset-css';
 import 'App.scss';
 
+const setStateAndClear = (setState) => {
+  let timeout;
+
+  return (state, clearAfter = 2000) => {
+    clearTimeout(timeout);
+    setState(state);
+    timeout = setTimeout(() => setState(null), clearAfter);
+  }
+};
+
 function App({ windowSize }) {
   const parametersRef = useRef(null);
   const mandelbrotRef = useRef(null);
   const interactionRef = useRef(null);
 
   const [showHelp, setShowHelp] = useState(true);
+  const [status, setStatus] = useState(null);
+  const [action, setAction] = useState(null);
 
-  const renderMandelbrot = () => render(mandelbrotRef.current, parametersRef.current);
+  const setStatusAndClear = setStateAndClear(setStatus);
+  const setActionAndClear = setStateAndClear(setAction);
+
+  const renderMandelbrot = async () => {
+    const timer = window.performance.now();
+    setStatus("rendering...");
+
+    await render(mandelbrotRef.current, parametersRef.current);
+
+    const result = window.performance.now() - timer;
+    setStatusAndClear(`rendered in ${result}ms.`, 2000);
+  };
+
+  const handlePopState = (event)  => {
+    parametersRef.current = parameters(query());
+
+    renderMandelbrot();
+  };
+
+  const toggleHelp = () => {
+    setShowHelp(!showHelp);
+  }
 
   useEffect(() => {
     if (parametersRef.current == null) {
@@ -38,20 +71,15 @@ function App({ windowSize }) {
     renderMandelbrot();
   }, [windowSize]);
 
-  const handlePopState = (event)  => {
-    parametersRef.current = parameters(query());
-
-    renderMandelbrot();
-  };
-
-  const toggleHelp = () => {
-    setShowHelp(!showHelp);
-  }
-
   return (
     <>
       {showHelp && <HelpLayer
         toggleHelp={toggleHelp}
+      />}
+      {parametersRef.current && <InfoLayer
+        status={status}
+        action={action}
+        wind0w={parametersRef.current.wind0w}
       />}
       <MandelbrotLayer
         parametersRef={parametersRef}
@@ -63,8 +91,8 @@ function App({ windowSize }) {
         interactionRef={interactionRef}
         toggleHelp={toggleHelp}
         renderMandelbrot={renderMandelbrot}
+        setAction={setActionAndClear}
       />
-      <StatusLayer />
     </>
   );
 }

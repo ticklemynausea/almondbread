@@ -1,7 +1,6 @@
 import { rescale } from "math";
 import { palettes } from "colors";
 import { update } from "query";
-import { message } from "status";
 
 const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
   wind0w: wind0w || { x0: -2.85, y0: 1.5, x1: 1.35, y1: -1.5 },
@@ -95,7 +94,6 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.iterations += i;
     }
 
-    message(`set max iterations: ${this.iterations}`);
     this.updateSearch();
   },
 
@@ -103,15 +101,12 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
     if (this.workers + i > 0) {
       this.workers += i;
     }
-
-    message(`set max worker threads: ${this.workers}`);
   },
 
   toggleColoringMethod() {
     const methods = ["lerp", "repeat"];
     this.coloringMethod = methods[(methods.indexOf(this.coloringMethod) + 1) % methods.length];
 
-    message(`set coloring method: ${this.coloringMethod}`);
     this.updateSearch();
   },
 
@@ -124,7 +119,6 @@ const parameters = ({ wind0w, palette, coloringMethod, iterations }) => ({
       this.palette = 0;
     }
 
-    message(`set palette: ${this.palette}`);
     this.updateSearch();
   },
 });
