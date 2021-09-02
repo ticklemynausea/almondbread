@@ -1,5 +1,7 @@
 import { memo, useEffect } from "react";
+import { debounce } from "lodash";
 
+import withPropsChecker from "withPropsChecker";
 import { download, filename } from "canvas";
 
 import "InteractionLayer.scss";
@@ -13,6 +15,8 @@ const InteractionLayer = ({
   setAction,
 }) => {
   let dragZoom = {};
+
+  const debouncedRender = debounce(renderMandelbrot, 100);
 
   useEffect(() => {
     interactionRef.current.width = interactionRef.current.clientWidth;
@@ -126,7 +130,7 @@ const InteractionLayer = ({
         return;
     }
 
-    renderMandelbrot();
+    debouncedRender();
   }
 
   const handleMouseDown = (e) => {
@@ -225,4 +229,4 @@ const InteractionLayer = ({
   );
 };
 
-export default memo(InteractionLayer);
+export default withPropsChecker(memo(InteractionLayer));

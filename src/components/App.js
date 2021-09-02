@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 import InteractionLayer from "InteractionLayer";
 import MandelbrotLayer from "MandelbrotLayer";
@@ -11,15 +11,7 @@ import { query } from "query";
 
 import 'App.scss';
 
-const setStateAndClear = (setState) => {
-  let timeout;
-
-  return (state, clearAfter = 2000) => {
-    clearTimeout(timeout);
-    setState(state);
-    timeout = setTimeout(() => setState(null), clearAfter);
-  }
-};
+const CLEAR_AFTER = 2000;
 
 function App({ windowSize }) {
   const parametersRef = useRef(null);
@@ -30,18 +22,34 @@ function App({ windowSize }) {
   const [status, setStatus] = useState(null);
   const [action, setAction] = useState(null);
 
-  const setStatusAndClear = setStateAndClear(setStatus);
-  const setActionAndClear = setStateAndClear(setAction);
+  const setStatusAndClearTimeoutRef = useRef(null);
+  const setStatusAndClear = useCallback((text) => {
+    clearTimeout(setStatusAndClearTimeoutRef.current);
+    setStatus(text);
+    setStatusAndClearTimeoutRef.current = setTimeout(() => {
+      setStatus(null)
+    }, CLEAR_AFTER);
+  }, []);
 
-  const renderMandelbrot = async () => {
+  const setActionAndClearTimeoutRef = useRef(null);
+  const setActionAndClear = useCallback((text) => {
+    clearTimeout(setActionAndClearTimeoutRef.current);
+    setAction(text);
+    setActionAndClearTimeoutRef.current = setTimeout(() => {
+      setAction(null)
+    }, CLEAR_AFTER);
+  }, []);
+
+  const renderMandelbrot = useCallback(async () => {
     const timer = window.performance.now();
     setStatus("rendering...");
 
     await render(mandelbrotRef.current, parametersRef.current);
 
     const result = window.performance.now() - timer;
-    setStatusAndClear(`rendered in ${result}ms.`, 2000);
-  };
+
+    setStatusAndClear(`rendered in ${result}ms.`);
+  }, [setStatusAndClear]);
 
   const handlePopState = (event)  => {
     parametersRef.current = parameters(query());
@@ -49,9 +57,9 @@ function App({ windowSize }) {
     renderMandelbrot();
   };
 
-  const toggleHelp = () => {
-    setShowHelp(!showHelp);
-  }
+  const toggleHelp = useCallback(() => {
+    setShowHelp(showHelp => !showHelp);
+  }, []);
 
   useEffect(() => {
     if (parametersRef.current == null) {
@@ -61,7 +69,6 @@ function App({ windowSize }) {
     window.onpopstate = handlePopState;
   });
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     interactionRef.current.width = windowSize.windowWidth;
     interactionRef.current.height = windowSize.windowHeight;
@@ -69,8 +76,7 @@ function App({ windowSize }) {
     mandelbrotRef.current.height = windowSize.windowHeight
 
     renderMandelbrot();
-  }, [windowSize]);
-  /* eslint-enable react-hooks/exhaustive-deps */
+  }, [windowSize, renderMandelbrot]);
 
   return (
     <div id="app">
