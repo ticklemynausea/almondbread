@@ -61,6 +61,7 @@ function App({ windowSize }) {
     window.onpopstate = handlePopState;
   });
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     interactionRef.current.width = windowSize.windowWidth;
     interactionRef.current.height = windowSize.windowHeight;
@@ -69,6 +70,7 @@ function App({ windowSize }) {
 
     renderMandelbrot();
   }, [windowSize]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div id="app">
