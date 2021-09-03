@@ -10,8 +10,8 @@ const InfoLayer = ({ wind0w, action, status }) => {
   return (
     <div id="info-layer" className="fullscreen-overlay">
       <div className="coordinates">
-        <span>{xy2cpx(x0, y0)} to {xy2cpx(x1, y1)} (magnitude 10</span>
-        <span className="magnitude">{mag}</span>
+        <span>{xy2cpx(x0, y0)} to {xy2cpx(x1, y1)} (depth 10</span>
+        <span className="depth">{mag}</span>
         <span>)</span>
       </div>
       <div className="action">
