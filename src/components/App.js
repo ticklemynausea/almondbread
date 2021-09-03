@@ -9,7 +9,7 @@ import { parameters } from "parameters";
 import { render } from "mandelbrot";
 import { query } from "query";
 
-import 'App.scss';
+import "App.scss";
 
 const CLEAR_AFTER = 2000;
 

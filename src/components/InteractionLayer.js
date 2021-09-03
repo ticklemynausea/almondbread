@@ -1,7 +1,6 @@
 import { memo, useEffect } from "react";
 import { debounce } from "lodash";
 
-import withPropsChecker from "withPropsChecker";
 import { download, filename } from "canvas";
 
 import "InteractionLayer.scss";
@@ -15,7 +14,6 @@ const InteractionLayer = ({
   setAction,
 }) => {
   let dragZoom = {};
-
   const debouncedRender = debounce(renderMandelbrot, 100);
 
   useEffect(() => {
@@ -229,4 +227,4 @@ const InteractionLayer = ({
   );
 };
 
-export default withPropsChecker(memo(InteractionLayer));
+export default memo(InteractionLayer);
