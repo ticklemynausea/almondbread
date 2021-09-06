@@ -4,6 +4,7 @@ const hex2rgb = (palette) => palette
   .map((p) => [p.substr(0, 2), p.substr(2, 2), p.substr(4, 2)].map((p) => parseInt(p, 16)));
 
 const palettes = [
+    ["09012F", "040449", "000764", "0C2C8A", "1852B1", "397DD1", "86B5E5", "D3ECF8", "F1E9BF", "F8C95F", "FFAA00", "CC8000", "995700", "19071A", "6A3403", "000000"],
     ["E3F2FD", "BBDEFB", "90CAF9", "64B5F6", "42A5F5", "2196F3", "1E88E5", "1976D2", "1565C0", "0D47A1"],
     ["0466C8", "0353A4", "023E7D", "002855", "001845", "001233", "33415C", "5C677D", "7D8597", "979DAC"],
     ["FEC5BB", "FCD5CE", "FAE1DD", "F8EDEB", "E8E8E4", "D8E2DC", "ECE4DB", "FFE5D9", "FFD7BA", "FEC89A"],
@@ -39,7 +40,6 @@ const palettes = [
     ["E2E2DF", "D2D2CF", "E2CFC4", "F7D9C4", "FAEDCB", "C9E4DE", "C6DEF1", "DBCDF0", "F2C6DE", "F9C6C9"],
     ["DEC9E9", "DAC3E8", "D2B7E5", "C19EE0", "B185DB", "A06CD5", "9163CB", "815AC0", "7251B5", "6247AA"],
     ["E03615", "E24C16", "E46217", "E67818", "E88D18", "ECB81A", "EECE1B", "EFD91B", "F0DE1B", "F0E31B"],
-    ["421E0F", "19071A", "09012F", "040449", "000764", "0C2C8A", "1852B1", "397DD1", "86B5E5", "D3ECF8", "F1E9BF", "F8C95F", "FFAA00", "CC8000", "995700", "6A3403", "000000"],
 ].map(hex2rgb);
 
 const mapColors = (iterations, paletteIndex, coloringMethod) => {
