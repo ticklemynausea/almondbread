@@ -27,7 +27,7 @@ A Mandelbrot set renderer with nifty features. Explore the depths and infinite d
 
 ### Mobile version
 
-The app refuses to run at all on mobile and shows a blocking screen, on purpose, to avoid anunusable experience.
+The app refuses to run at all on mobile and shows a blocking screen, on purpose, to avoid an unusable experience.
 
 It is a priority to implement usability on touch devices.
 
@@ -37,7 +37,7 @@ The app is somewhat unstable on heavy renders and sometimes crashes the browser 
 
 ### Arbitrary floating point precision
 
-Experiment with an arbitrary floting point math library
+Experiment with an arbitrary floating point math library.
 
 ### Color palettes
 
